@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { quizData } from './quizData';
 import './App.css';
 
-// Context for requirement 4
 const QuizContext = React.createContext();
 
 export default function App() {
@@ -18,14 +17,11 @@ export default function App() {
 }
 
 function Quiz() {
-  // Requirement 1: set up the initial state using the useState Hook.
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
   
-  // Requirement 2: Use the useState Hook to manage the user's input
   const [currentInput, setCurrentInput] = useState('');
 
-  // Requirement 3: Use the useEffect Hook to display the questions and answer options from the state.
   const [questionData, setQuestionData] = useState(null);
 
   const { setSelectedAnswers } = useContext(QuizContext);
@@ -33,7 +29,7 @@ function Quiz() {
   useEffect(() => {
     if (currentQuestionIndex < quizData.length) {
       setQuestionData(quizData[currentQuestionIndex]);
-      setCurrentInput(''); // reset input on question change
+      setCurrentInput('');
     } else {
       setIsFinished(true);
     }
@@ -79,7 +75,6 @@ function Quiz() {
         ))}
       </div>
       
-      {/* Display correct/incorrect immediately after the options */}
       <AnswerFeedback currentQuestionIndex={currentQuestionIndex} />
       
       <br />
@@ -89,9 +84,6 @@ function Quiz() {
 }
 
 function AnswerFeedback({ currentQuestionIndex }) {
-  // Requirement 4: Use the useContext Hook to access the selected answer from the state.
-  // Compare the selected answer with the correct answer for each question.
-  // Display whether the selected answer is correct or incorrect in the UI.
   const { selectedAnswers } = useContext(QuizContext);
   const selectedAnswer = selectedAnswers[currentQuestionIndex];
   const question = quizData[currentQuestionIndex];
